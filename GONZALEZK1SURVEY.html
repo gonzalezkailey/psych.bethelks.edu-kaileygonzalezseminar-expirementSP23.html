@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <script src="https://unpkg.com/jspsych@7.3.2" type="text/javascript"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script>
+  <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body></body>
+<script type="text/javascript">
+
+   // Initialize jsPsych
+  //---------------------------------------------
+
+  function saveData(name, data){
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'write_data.php'); // 'write_data.php' is the path to the php file described above.
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({filename: name, filedata: data}));
+}
+
+    // // Saving Data Apache Server
+    // function saveData(filename, filedata){
+    //   $.ajax({
+    //     type:'post',
+    //     cache: false,
+    //     url: 'save_data.php', // path to the php script for saving data
+    //     data: {filename: filename, filedata: filedata}
+    //   })
+    // };
+
+var jsPsych = initJsPsych({
+  show_progress_bar: true,
+  on_finish: function(){ saveData(randSubject_id + "_gonzalezSeminar",jsPsych.data.get().csv()); }
+});
+
+  // Generate random subject ID and add it to the jsPsych data
+  //--------------------------------------------------
+
+  var randSubject_id = jsPsych.randomization.randomID()
+  jsPsych.data.addProperties({
+    randSubjectID: randSubject_id,
+    date: Date()
+  }); 
+
+
+  // Initial Instructions    
+  //--------------------------------------------------
+
+  var initialInstructions = {
+    type: jsPsychInstructions,
+    pages: ['<p>Thank you for participating in my survey. You will be asked sets of questions. Please answer all questions to the best of your abilities. At any time you do not feel comfortable completing this survey you can exit. All information will remain confidential. You will need to complete on a laptop or web browser.],</p><p>Click next to begin.</p>'],
+    show_clickable_nav: true
+  };
+ var randsubject_id= jsPsych.randomization.randomID()
+ jsPsych.data.addProperties({
+     randsubjectid:randsubject_id,
+     date: Date()
+ });    
+
+
+
+  // Pre-survey Instructions    
+  //--------------------------------------------------
+
+  var preSurveyInstructions = {
+    type: jsPsychInstructions,
+    pages: ['<p>On the following screens, you will be presented with a series of statements about yourself. Please indicate the extent to which you agree or disagree with each statement using the scale provided.  </p><p>Click next to begin.</p>'],
+    show_clickable_nav: true
+  };
+
+  // Main Survey Questions
+  //--------------------------------------------------
+
+  var scale = ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree",];
+
+
+  var likert_trial1 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      {prompt: "My Father...<BR> Spoke to me in a warm and friendly voice.", name: 'Care', labels: scale, required: true},
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+  data:{measure:'PBI1', question:'Spoke to me in a warm and friendly voice.'}
+  };
+
+  var likert_trial2 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Did not help me as much as I needed.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not help me as much as I needed.'}
+
+  };
+  var likert_trial3 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Let me do the things I liked doing.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me do the things I like doing.'}
+
+  };
+  var likert_trial4 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Appeared to understand my problems and worries.", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Appeared to understand my problems and worries.'}
+
+  };
+
+  var likert_trial5 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Seemed emotionally cold to me.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Seemed emotionally cold to me.'}
+
+  };
+  var likert_trial6 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father..<BR> Was affectionate to me:.", name:'Care', labels:scale, required:true}
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Was affectionate to me.'}
+
+  };
+  var likert_trial7 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Liked me to make my own decision.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Liked me to make my own decision'}
+
+  };
+  var likert_trial8 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Did not want me to grow up.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'I am someone who Did not want me to grow up.'}
+
+  };
+  var likert_trial9 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Tried to control everything I did.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Tried to control everything I did.'}
+
+  };
+  var likert_trial10 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Inavded my privavy.", name: 'Overprotection', labels: scale, required: true }
+    ], 
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'I am someonewho inavded my privavy.'}
+
+  };
+  var likert_trial11 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Enjoyed talking things over with me.", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Enjoyed talking things over with me.'}
+
+  };
+  var likert_trial12 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Frequently smiled at me", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Frequently smiled at me'}
+
+  };
+  var likert_trial13 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Tended to baby me", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Tended to baby me.'}
+
+  };
+  var likert_trial14 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Did not seem to understand what I needed or wanted.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not seem to understand what I needed or wanted.'}
+
+  };
+  var likert_trial15 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Made me feel like I wasnt wanted.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+    data:{measure:'PBI1', question:'Made me feel like I wasnt wanted.'}
+
+  };
+  var likert_trial16 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Could make me feel better when I was upset.", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Could make me feel better when I was upset.'}
+
+  };
+  var likert_trial17 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Did not talk to me much.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not talk to me much.'}
+
+  };
+  var likert_trial18 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Tried to make me feel dependent of him.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Tried to make me feel dependent of him.'}
+
+  };
+  var likert_trial19 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Felt I could not look after myself unless he was around.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Felt I could not look after myself unless he was around.'}
+
+  };
+  var likert_trial20 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Gave me as much freedom as I wanted.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Gave me as much freedom as I wanted.'}
+
+  };
+  var likert_trial21 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Let me go out as often as I wanted.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me go out as often as I wanted.'}
+
+  };
+  var likert_trial22 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Was overprotective of me.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Was overprotective of me.'}
+
+  };
+  var likert_trial23 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Did not praise me.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not praise me.'}
+
+  };
+  var likert_trial24 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Let me dress in any way I please", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me dress in any way I please'}
+
+  };
+  var likert_trial25 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Father...<BR> Let me decide for myself.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me decide for myself.'}
+
+  };
+  var likert_trial26 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      {prompt: "My Mother...<BR> Spoke to me in a warm and friendly voice.", name: 'Care', labels: scale, required: true},
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+  data:{measure:'PBI1', question:'Spoke to me in a warm and friendly voice.'}
+  };
+
+  var likert_trial27 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Did not help me as much as I needed.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not help me as much as I needed.'}
+
+  };
+  var likert_trial28 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Let me do the things I liked doing.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me do the things I like doing.'}
+
+  };
+  var likert_trial29 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Appeared to understand my problems and worries.", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Appeared to understand my problems and worries.'}
+
+  };
+
+  var likert_trial30 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Seemed emotionally cold to me.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Seemed emotionally cold to me.'}
+
+  };
+  var likert_trial31 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother..<BR> Was affectionate to me:.", name:'Care', labels:scale, required:true}
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Was affectionate to me.'}
+
+  };
+  var likert_trial32 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Liked me to make my own decision.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Liked me to make my own decision'}
+
+  };
+  var likert_trial33 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Did not want me to grow up.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'I am someone who Did not want me to grow up.'}
+
+  };
+  var likert_trial34 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Tried to control everything I did.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Tried to control everything I did.'}
+
+  };
+  var likert_trial35 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Inavded my privavy.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'I am someonewho inavded my privavy.'}
+
+  };
+  var likert_trial36 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Enjoyed talking things over with me.", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Enjoyed talking things over with me.'}
+
+  };
+  var likert_trial37 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Frequently smiled at me", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Frequently smiled at me'}
+
+  };
+  var likert_trial38 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Tended to baby me", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Tended to baby me.'}
+
+  };
+  var likert_trial39 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Did not seem to understand what I needed or wanted.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not seem to understand what I needed or wanted.'}
+
+  };
+  var likert_trial40 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Made me feel like I wasnt wanted.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+    data:{measure:'PBI1', question:'Made me feel like I wasnt wanted.'}
+
+  };
+  var likert_trial41 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Could make me feel better when I was upset.", name: 'Care', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Could make me feel better when I was upset.'}
+
+  };
+  var likert_trial42 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Did not talk to me much.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not talk to me much.'}
+
+  };
+  var likert_trial43 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Tried to make me feel dependent of him.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Tried to make me feel dependent of him.'}
+
+  };
+  var likert_trial44 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Felt I could not look after myself unless he was around.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Felt I could not look after myself unless he was around.'}
+
+  };
+  var likert_trial45 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Gave me as much freedom as I wanted.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Gave me as much freedom as I wanted.'}
+
+  };
+  var likert_trial46 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Let me go out as often as I wanted.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me go out as often as I wanted.'}
+
+  };
+  var likert_trial47 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Was overprotective of me.", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'PBI1', question:'Was overprotective of me.'}
+
+  };
+  var likert_trial48 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Did not praise me.", name: 'Care Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Did not praise me.'}
+
+  };
+  var likert_trial49 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Let me dress in any way I please", name: 'Overprotection', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me dress in any way I please'}
+
+  };
+  var likert_trial50 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "My Mother...<BR> Let me decide for myself.", name: 'Overprotection Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'PBI1', question:'Let me decide for myself.'}
+
+  };
+    
+    var SelfEsteemAttachmentInstructions = {
+    type: jsPsychInstructions,
+    pages: ['<p>These questions will prompt you with a series of statements. Please indicate the extent to which you agree or disagree with each statement using the scale provided." </p><p>Click next to begin.</p>'],
+    show_clickable_nav: true
+  };
+  var likert_trial51 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "On a whole, I am satisfied with myself.", name: 'M', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'RSS', question:'On a whole, I am satisfied with myself.'}
+
+  };
+  var likert_trial52 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "At times I think I am no good at all.", name: 'Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'RSS', question:'At times I think I am no good at all.'}
+
+  };
+  var likert_trial53 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I feel that I have a number of good qualities.", name: 'M', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'RSS', question:'I feel that I have a number of good qualities'}
+
+  };
+  var likert_trial54 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I am able to do things as well as most other people.", name: 'M', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'RSS', question:'I am able to do things as well as most other people.'}
+
+  };
+  var likert_trial55 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I feel I do not have much to be proud of.", name: 'Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'RSS', question:'I feel I do not have much to be proud of..'}
+
+  };
+  var likert_trial56 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I certainly feel useless at times.", name: 'Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'RSS', question:'I certainly feel useless at times.'}
+
+  };
+  var likert_trial57 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I feel that I am a person of worth, at least on an equal plane with others", name: 'M', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'RSS', question:'I feel that I am a person of worth, at least on an equal plane with others'}
+
+  };
+  var likert_trial58 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I wish I could have more respect for myself", name: 'Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'RSS', question:'I wish I could have more respect for myself'}
+
+  };
+  var likert_trial59 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "All in all, I am inclinded to feel that I am a failure.", name: 'Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'RSS', question:'All in all, I am inclinded to feel that I am a failure.'}
+
+  };
+  var likert_trial60 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I take a positive attitude towards myself.", name: 'M', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'RSS', question:'I take a positive attitude towards myself'}
+
+  };
+  var likert_trial61 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I find it relatively easy to get close to people.", name: 'Close', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I find it relatively easy to get close to people.'}
+
+  };
+  var likert_trial62 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I find it difficult to allow myself to depend on others.", name: 'Depend Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I find it difficult to allow myself to depend on others.'}
+
+  };
+var likert_trial63 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I often worry that other people do not really love me.", name: 'Anxious', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I often worry that other people do not really love me.'}
+
+  };
+var likert_trial64 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I find that others are reluctent to get as close as I would like.", name: 'Anxious', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I find that others are reluctent to get as close as I would like'}
+
+  };
+  var likert_trial65 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I am comfortable depending on others", name: 'Depend', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I am comfortable depending on others.'}
+
+  };
+  var likert_trial66 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I do not worry about people getting too close to me.", name: 'Close', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I do not worry about people getting too close to me.'}
+
+  };
+  var likert_trial67 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I find that people are never there when you need them.", name: 'Depend Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I find that people are never there when you need them.'}
+
+  };
+  var likert_trial68 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I am somewhat uncomfortable being close to others.", name: 'Close Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I am somewhat uncomfortable being close to others.'}
+
+  };
+  var likert_trial69 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I often worry that people won't want to stay with me", name: 'Anxious', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I often worry that people will not want to stay with me'}
+
+  };
+  var likert_trial70 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "When I show my feelings for others, I am afraid they will not feel the same about me.", name: 'Anxious', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'When I show my feelings for others, I am afraif they will not feel the same about me.'}
+
+  };
+  var likert_trial71 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I often wonder whether other people really care.", name: 'Anxious', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I often wonder whether other people really care.'}
+
+  };
+  var likert_trial72 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I am comfortable developing close relationships with others.", name: 'Close', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I am comfortable developing close relationships with others.'}
+
+  };
+  var likert_trial73 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I am uncomfortable when anyone gets too emotionally close to me.", name: 'Close Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I am uncomfortable when anyone gets too emotionally close to me.'}
+
+  };
+  var likert_trial74 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I know that people will be there when I need them.", name: 'Depend', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I know that people will be there when I need them.'}
+
+  };
+  var likert_trial75 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I want to get close to people, but I worry about being hurt.", name: 'Close Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I want to get close to peoplem but I worry about being hurt.'}
+
+  };
+  var likert_trial76 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I find it difficult to trust others completely.", name: 'Depend Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'I find it difficult to trust others completely.'}
+
+  };
+  var likert_trial77 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "People often want me to be emotionally closer than I feel comfortable being.", name: 'Close Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'AAS', question:'People often want me to be emotionally close than I feel comfortable being.'}
+
+  };
+  var likert_trial78 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "I am not sure that I can always depend on others to be there when I need them.", name: 'Depend Reverse', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'AAS', question:'I am not sure that I can always depend on others to be there when I need them.'}
+
+  };
+  var likert_trial79 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "Please Select strongly disagree.", name: 'catch', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500, 
+      data:{measure:'Catch', question:'Please Select strongly disagree.'}
+
+  };
+  var likert_trial80 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "Please Select strongly agree.", name: 'catch', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+      data:{measure:'Catch', question:'Please Select strongly agree.'}
+
+  };
+    var likert_trial81 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+      { prompt: "Please Select agree.", name: 'catch', labels: scale, required: true }
+    ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+        data:{measure:'Catch', question:'Please Select agree.'}
+  };
+    var likert_trial82 = {
+      type: jsPsychSurveyLikert,
+      questions: [
+        { prompt: "Please Select disagree.", name: 'catch', labels:scale, required: true }
+      ],
+    randomize_question_order: true,
+    scale_wiRSSh: 500,
+        data:{measure:'Catch', question:'Please Select disagree.'}
+    };
+
+    // Demographic Instructions    
+  //--------------------------------------------------
+
+var demographicInstructions = {
+  type: jsPsychInstructions,
+  pages: ['<p>These following questions are demographic questions for me to help understand who has taken the survey. If you are not comfortable disclosing your gender or race please select the "other" option. </p><p>Click next to begin.</p>'], show_clickable_nav: true
+};
+
+  // Demographics
+  //--------------------------------------------------
+
+  var demographic_1 = {
+    type: jsPsychSurveyHtmlForm,
+    preamble: '<p> How old are you? </p>',
+    html: '<p>I am  <input name="first" type="text" />.</p>'
+
+      };
+
+        var demographic_2 = {
+        type: jsPsychSurveyMultiSelect,
+        questions: [
+          {
+            prompt: "What gender do you idenitfy as?", 
+            options: ["Male", "Female", "other"], 
+            horizontal: true,
+            required: true,
+            name: 'Gender'
+          }
+            ],
+            randomize_question_order: true
+      };
+
+        var demographic_3= {
+        type: jsPsychSurveyMultiSelect,
+        questions: [
+          {
+            prompt: "Please specify your race/ethnicity.", 
+            options: ["Native American or Alaskan Native", "Asian", "Black or African American", "Hispanic or Latino", "Native Hawaiian and Pacific Islander", "White", "Other"], 
+            horizontal: true,
+            required: true,
+            name: 'Race'
+          }
+            ],
+            randomize_question_order: true
+      };
+      
+        var demographic_4= {
+        type: jsPsychSurveyMultiSelect,
+        questions: [
+          {
+            prompt: "What is your current major?", 
+            options: ["Business", "Psychology", "Health and Physical Education", "Arts and Humanities", "Accounting", "Bible and Religion", "Biochemistry and Molecular Biology", "Biology", "Chemistry", "Clinical and Counseling", "Communication Arts", "Education", "English", "Environmental Science", "Financial Management", "German", "History", "Human Services", "Interprofessional Health", "Marketing", "Music", "Neuroscience", "Nursing", "Peace, Justice and Conflict", "Philosophy", "Physics", "Pre-Engineering", "Pre-health Professions", "Pre-law", "Pre-Medicine", "Social Work", "Software Development"], 
+            horizontal: true,
+            required: true,
+            name: 'Education'
+          }
+            ],
+            randomize_question_order: true
+      };
+        var demographic_5 = {
+        type: jsPsychSurveyMultiSelect,
+        questions: [
+          {
+            prompt: "Are you currently enrolled at a College or University?", 
+            options: ["Yes", "No"], 
+            horizontal: true,
+            required: true,
+            name: 'Education'
+          }
+            ],
+            randomize_question_order: true
+          };
+
+  // Debriefing
+  //--------------------------------------------------
+
+  var debriefing = {
+            type: jsPsychInstructions,
+            pages:['<p>This study was to better understand the connections that parenting styles have with self-esteem and attachment styles. My goal was to understand how in early adulthood, our parents have affected the ways that we perceive ourselves and how we create attachments in relationships. My hypotheses were that authoritarian parenting styles will cause low self-esteem and anxious attachment styles in participants. My second hypothesis is that permissive parenting styles will cause low self-esteem and avoidant attachment styles in participants. If you would like to know more about this study or have questions about this study please contact Kailey Gonzalez at (kaileyegonzalez@bethelks.edu) or Dr. Bradley Celestin at (bcelestin@bethelks.edu) Mental Health Resources: Prairie View Crisis Line: (800) 992-6292 Director of Student Wellness: pturner@bethelks.edu (316) 284-5326 </p>'],
+           show_clickable_nav:true
+        };
+
+
+ var PBI1questions = jsPsych.randomization.shuffle([likert_trial1, likert_trial2, likert_trial3, likert_trial4, likert_trial5, likert_trial6, likert_trial7, likert_trial8, likert_trial9, likert_trial10, likert_trial11, likert_trial12, likert_trial13, likert_trial14, likert_trial15, likert_trial16, likert_trial17, likert_trial18, likert_trial19, likert_trial20, likert_trial21, likert_trial22, likert_trial23, likert_trial24, likert_trial25, likert_trial26, likert_trial27, likert_trial28, likert_trial29, likert_trial30, likert_trial31, likert_trial32, likert_trial33, likert_trial34, likert_trial35, likert_trial36, likert_trial37, likert_trial38, likert_trial39, likert_trial40, likert_trial41, likert_trial42, likert_trial43, likert_trial44, likert_trial45, likert_trial46, likert_trial47, likert_trial48, likert_trial49, likert_trial50, likert_trial79,]);
+    
+    var RSSAASquestions = jsPsych.randomization.shuffle([likert_trial51, likert_trial52, likert_trial53, likert_trial54, likert_trial55, likert_trial56, likert_trial57, likert_trial58, likert_trial39, likert_trial59, likert_trial60, likert_trial61, likert_trial62, likert_trial63, likert_trial64,likert_trial65, likert_trial66, likert_trial67, likert_trial68, likert_trial69, likert_trial70, likert_trial71, likert_trial72, likert_trial73, likert_trial74, likert_trial75, likert_trial76, likert_trial77, likert_trial78, likert_trial81, likert_trial82,]);
+    
+
+//var myArray= [ PBI1questions, RSSAASquestions];
+   // var shuffledArray= jsPsych.randomization.shuffle(myArray,1)
+
+  // Generate array containing all of the main survey questions in a randomized order      
+  //var mainQuestions = jsPsych.randomization.shuffle([likert_trial1, likert_trial2, likert_trial3, likert_trial4, likert_trial5, likert_trial6, likert_trial7, likert_trial8, likert_trial9, likert_trial10, likert_trial11, likert_trial12, likert_trial13, likert_trial14, likert_trial15, likert_trial16, likert_trial17, likert_trial18, likert_trial19, likert_trial20, likert_trial21, likert_trial22, likert_trial23, likert_trial24, likert_trial25, likert_trial26, likert_trial27, likert_trial28, likert_trial29, likert_trial30, likert_trial31, likert_trial32, likert_trial33, likert_trial34, likert_trial35, likert_trial36, likert_trial37, likert_trial38, likert_trial39, likert_trial40, likert_trial41, likert_trial42, likert_trial43, likert_trial44, likert_trial45, likert_trial46, likert_trial47, likert_trial48, likert_trial49, likert_trial50, likert_trial51, likert_trial52, likert_trial53, likert_trial54, likert_trial55, likert_trial56, likert_trial57, likert_trial58, likert_trial59, likert_trial60, likert_trial61, likert_trial62, likert_trial63, likert_trial64,likert_trial65, likert_trial66, likert_trial67, likert_trial68, likert_trial69, likert_trial70, likert_trial71, likert_trial72, likert_trial73, likert_trial74, likert_trial75, likert_trial76, likert_trial77, likert_trial78, likert_trial79, likert_trial80, likert_trial81, likert_trial82, demographic_1, demographic_2, demographic_3, demographic_4, demographic_5, );
+
+
+//00ate timeline and add trials in order of presentation
+//var jsPsych =initJsPsych({
+ //    on_finish: function(){
+   //      jsPsych.data.displayData('csv');
+ //    }
+// })
+ //var all_data= jsPsych.data.get();
+// console.log(all_data.csv());
+  console.log(jsPsych.data.get().gonzakai());
+    timeLine = [];
+  //timeLine = timeLine.concat(initialInstructions, preSurveyInstructions, mainQuestions, demographicInstructions, demographics, debriefing)
+shortTimeLine= timeLine.concat(initialInstructions, preSurveyInstructions, likert_trial1, likert_trial2, likert_trial3, likert_trial4, likert_trial5, likert_trial6, likert_trial7, likert_trial8, likert_trial9, likert_trial10, likert_trial11, likert_trial12, likert_trial13, likert_trial14, likert_trial15, likert_trial16, likert_trial17, likert_trial18, likert_trial19, likert_trial20, likert_trial21, likert_trial22, likert_trial23, likert_trial24, likert_trial25, likert_trial26, likert_trial27, likert_trial28, likert_trial29, likert_trial30, likert_trial31, likert_trial32, likert_trial33, likert_trial34, likert_trial35, likert_trial36, likert_trial37, likert_trial38, likert_trial39, likert_trial40, likert_trial41, likert_trial42, likert_trial43, likert_trial44, likert_trial45, likert_trial46, likert_trial47, likert_trial48, likert_trial49, likert_trial50, likert_trial51, likert_trial52, likert_trial53, likert_trial54, likert_trial55, likert_trial56, likert_trial57, likert_trial58, likert_trial59, likert_trial60, likert_trial61, likert_trial62, likert_trial63, likert_trial64,likert_trial65, likert_trial66, likert_trial67, likert_trial68, likert_trial69, likert_trial70, likert_trial71, likert_trial72, likert_trial73, likert_trial74, likert_trial75, likert_trial76, likert_trial77, likert_trial78, likert_trial79, likert_trial80, likert_trial81, likert_trial82, demographicInstructions, demographic_1, demographic_2, demographic_3, demographic_4, demographic_5, debriefing)
+// Initialize jsPsych.run with the entire timeline
+  jsPsych.run(shortTimeLine)
+
+
+</script>
+
+</html>
+
+<!DOCTYPE html>
